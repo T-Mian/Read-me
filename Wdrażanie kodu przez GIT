@@ -1,0 +1,22 @@
+Wdrażanie kodu przez GIT
+
+# Ustawia dane uwierzytelniające na poziomie konta
+az webapp deployment user set \
+  --user-name webapp-user \
+  --password webapp-password-123
+
+# Pobiera adres URL zdalnego repozytorium git aplikacji
+url=$(az webapp deployment source config-local-git \
+  --name webapp-static \
+  --resource-group webapp-rg \
+  --query url \
+  --output tsv)
+
+# Dodaje URL zdalnego repozytorium git aplikacji.
+git remote add azure $url
+
+# Wysyła kod do zdalnego repozytorium git aplikacji.
+git push azure master
+
+# Strona dostępna jest pod adresem http://webapp-static.azurewebsites.net
+curl http://webapp-static.azurewebsites.net
