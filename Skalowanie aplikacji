@@ -1,0 +1,7 @@
+Skalowanie aplikacji
+
+# Skaluje aplikację do dwóch instancji.
+az appservice plan update \
+  --number-of-workers 2 \
+  --name webapp-plan \
+  --resource-group webapp-rg
