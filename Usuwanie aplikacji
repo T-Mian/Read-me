@@ -1,0 +1,11 @@
+Usunięcie aplikacji
+
+# Usuwa aplikację usługi App Service
+az webapp delete \
+  --name webapp-static \
+  --resource-group webapp-rg
+
+# Usuwa plan usługi App Service
+az appservice plan delete \
+  --name webapp-plan \
+  --resource-group webapp-rg
