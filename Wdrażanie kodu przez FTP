@@ -1,0 +1,14 @@
+Wdrażanie kodu przez FTP
+
+# Pobiera dane uwierzytelniające FTP
+creds=($(az webapp deployment list-publishing-profiles \
+  --name webapp-static \
+  --resource-group webapp-rg \
+  --query "[?contains(publishMethod, 'FTP')].[publishUrl,userName,userPWD]" \
+  --output tsv))
+
+# Wgrywa plik index.html na serwer FTP
+curl -T index.html -u ${creds[1]}:${creds[2]} ${creds[0]}/
+
+# Strona dostępna jest pod adresem http://webapp-static.azurewebsites.net
+curl http://webapp-static.azurewebsites.net
